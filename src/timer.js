@@ -1,20 +1,24 @@
-// import React from "react";
+import React from "react";
 
 let start = Date.now();
 
+console.log(Date.now() / 1000);
+
 const WhatTime = () => {
-  let timeSince = Date.now() - start;
+  let timeSince = Math.floor((4105854000000 - Date.now()) / 1000);
   console.log(timeSince);
+  // console.log(Date.now());
   return timeSince;
 };
 
-// console.log(start);
+// const renderTimer = () => {
+//   ReactDOM.render(<WhatTime />, document.getElementById("WhatTime"));
+// };
 
-// let posTime = 0;
+let myVar = setInterval(WhatTime, 10000);
+console.log("myVar;" + myVar);
 
-// while (true) {
-//   posTime = Date.now() - start;
-// }
+// clearTimeout(myVar);
 
 const Timer = () => {
   console.log("buggy");
