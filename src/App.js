@@ -11,15 +11,9 @@ let newTime = 0;
 const calcTime = () => {
   if (state === "WORK") {
     newTime = prevTime + (Date.now() - startTime) / 1000;
-    // console.log("working");
   } else if (state === "PLAY") {
     newTime = prevTime - (Date.now() - startTime) / 1000;
-    // console.log("playing");
-  } else {
-    // console.log("paused");
   }
-  // console.log("newTime:" + Math.floor(newTime));
-  // return newTime;
 };
 
 let x = setInterval(calcTime, 1000);
@@ -48,24 +42,24 @@ const pauseTime = () => {
 };
 
 function App() {
+  console.log("buggy");
+
   const [timerTime, whatTime] = useState(5);
-  console.log(timerTime);
+  const [theState, whatState] = useState("PAUSED");
 
   const checkTime = () => {
     calcTime();
-
-    if (timerTime !== Math.floor(newTime)) {
-      whatTime(Math.floor(newTime));
-    }
-    // console.log("value:" + timerTime);
+    whatTime(Math.floor(newTime));
+    whatState(state);
   };
 
-  setInterval(checkTime, 1000);
+  setInterval(checkTime, 100);
 
   return (
     <div className="App">
       <header className="App-header">
         <div>{timerTime}</div>
+        <div>{theState}</div>
         <button onClick={switchstate}>WORK/PLAY</button>
         <button onClick={pauseTime}>PAUSE</button>
       </header>
