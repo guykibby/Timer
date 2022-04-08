@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 let state = "PAUSE";
-let prevState = "PAUSE";
+let prevState = "WORK";
 
 let prevTime = 0;
 let startTime = Date.now();
@@ -15,8 +15,6 @@ const calcTime = () => {
     newTime = prevTime - (Date.now() - startTime) / 1000;
   }
 };
-
-let x = setInterval(calcTime, 1000);
 
 const switchstate = () => {
   prevTime = newTime;
@@ -41,29 +39,38 @@ const pauseTime = () => {
   }
 };
 
+// let seconds = ("0" + (Math.floor((time / 1000) % 60) % 60)).slice(-2);
+// let minutes = ("0" + Math.floor((time / 60000) % 60)).slice(-2);
+// let hours = ("0" + Math.floor((time / 3600000) % 60)).slice(-2);
+
 function App() {
   console.log("buggy");
 
   const [timerTime, whatTime] = useState(5);
   const [theState, whatState] = useState("PAUSED");
 
-  const checkTime = () => {
-    calcTime();
-    whatTime(Math.floor(newTime));
-    whatState(state);
-  };
+  useEffect(() => {
+    const checkTime = () => {
+      calcTime();
+      whatTime(Math.floor(newTime));
+      whatState(state);
+    };
 
-  setInterval(checkTime, 100);
+    setInterval(checkTime, 100);
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div>{timerTime}</div>
-        <div>{theState}</div>
-        <button onClick={switchstate}>WORK/PLAY</button>
-        <button onClick={pauseTime}>PAUSE</button>
-      </header>
-    </div>
+    <main className="App-main">
+      <div className="Timer box">{timerTime}</div>
+      <div className="ModeDisplay box">{theState}</div>
+
+      <button className="PauseButton button" onClick={pauseTime}>
+        {theState === "PAUSE" ? "START" : "PAUSE"}
+      </button>
+      <button className="SwitchButton button" onClick={switchstate}>
+        SWITCH
+      </button>
+    </main>
   );
 }
 
