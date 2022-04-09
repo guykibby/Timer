@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import settingsIcon from "./SettingsIcon.png";
+import pauseIcon from "./Pause.png";
+import playIcon from "./Play.png";
 
 let state = "PAUSE";
 let prevState = "WORK";
@@ -25,7 +28,6 @@ const switchstate = () => {
   } else {
     state = "WORK";
   }
-  return;
 };
 
 const pauseTime = () => {
@@ -59,22 +61,25 @@ function App() {
     setInterval(checkTime, 100);
   }, []);
 
-  let mainState = "App-main " + theState;
   let timerBoxState = "timerbox Timer" + theState;
+  let runImg = theState === "PAUSE" ? playIcon : pauseIcon;
 
   return (
-    <main className={mainState}>
-      <div className={timerBoxState}>
-        <p className="content">{timerTime}</p>
-      </div>
-      <div className="ModeDisplay">{theState}</div>
+    <main className={theState}>
+      <section className="App-main">
+        <div className={timerBoxState} onClick={switchstate}>
+          <p className="content">{timerTime}</p>
+        </div>
+        <div className="ModeDisplay">{theState}</div>
 
-      <button className="PauseButton button" onClick={pauseTime}>
-        {theState === "PAUSE" ? "START" : "PAUSE"}
-      </button>
-      <button className="SwitchButton button" onClick={switchstate}>
-        SWITCH
-      </button>
+        <img className="settings" src={settingsIcon} alt="settings" />
+        <img
+          className="pause-play"
+          src={runImg}
+          alt="play"
+          onClick={pauseTime}
+        />
+      </section>
     </main>
   );
 }
