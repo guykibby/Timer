@@ -59,10 +59,15 @@ function App() {
     setInterval(checkTime, 100);
   }, []);
 
+  let mainState = "App-main " + theState;
+  let timerBoxState = "timerbox Timer" + theState;
+
   return (
-    <main className="App-main">
-      <div className="Timer box">{timerTime}</div>
-      <div className="ModeDisplay box">{theState}</div>
+    <main className={mainState}>
+      <div className={timerBoxState}>
+        <p className="content">{timerTime}</p>
+      </div>
+      <div className="ModeDisplay">{theState}</div>
 
       <button className="PauseButton button" onClick={pauseTime}>
         {theState === "PAUSE" ? "START" : "PAUSE"}

@@ -1,39 +1,118 @@
 .App-main {
-  background-color: #282c34;
   height: 100vh;
-  margin: auto;
+  min-height: fit-content;
   display: grid;
   place-items: center;
-  grid-template-rows: 3fr 1.5fr 1fr 1fr;
+  grid-template-rows: 65% 1fr 1fr 1fr 1fr;
   color: white;
   padding: 1rem;
+  font-size: 1.6rem;
+}
+
+.PAUSE {
+  background-color: #600000;
+  transition: background-color 0.5s ease;
+}
+
+.WORK {
+  background-color: #0f0080;
+  transition: background-color 0.5s ease;
+}
+
+.PLAY {
+  background-color: #126100;
+  transition: background-color 0.5s ease;
+}
+
+.TimerPAUSE {
+  background-color: #980000;
+  box-shadow: inset 0 0 25px rgb(76, 76, 76), inset 10px 0 40px #f0f,
+    inset -10px 0 40px #0ff, inset 10px 0 150px #f0f, inset -10px 0 150px #0ff,
+    0 0 30px 15px #fff, 0 0 50px 30px #f0f, 0 0 70px 45px #0ff;
+}
+
+.TimerWORK {
+  background-color: #1500b4;
+  box-shadow: inset 0 0 50px rgb(76, 76, 76), inset 20px 0 80px rgb(183, 0, 255),
+    inset -20px 0 80px rgb(183, 0, 255), inset 20px 0 300px rgb(183, 0, 255),
+    inset -20px 0 300px rgb(183, 0, 255), 0 0 60px 30px rgb(159, 159, 159),
+    0 0 100px 60px rgb(183, 0, 255), 0 0 140px 90px rgb(183, 0, 255);
+  opacity: 1;
+  animation: flickerAnimation 1s infinite;
+}
+
+.TimerPLAY {
+  background-color: #1a9000;
+  box-shadow: inset 0 0 50px rgb(153, 153, 153),
+    inset 20px 0 80px rgb(255, 132, 0), inset -20px 0 80px rgb(255, 132, 0),
+    inset 20px 0 300px rgb(255, 132, 0), inset -20px 0 300px #0ff,
+    0 0 60px 30px rgb(76, 76, 76), 0 0 100px 60px rgb(255, 132, 0),
+    0 0 140px 90px rgb(255, 132, 0);
+  opacity: 1;
+  animation: flickerAnimation 1s infinite;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.box {
+@keyframes flickerAnimation {
+  /* flame pulses */
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.animate-flicker {
+}
+
+.timerbox {
   display: grid;
   place-items: center;
   border: 1px solid white;
-  width: 90%;
-  min-height: 80%;
-  max-width: 70rem;
-}
+  width: 65vw;
+  height: 65vw;
 
-.button {
-  margin: 1rem;
-  width: 60%;
-  height: 50%;
-  max-width: 40rem;
-  font-size: 3vh;
-}
+  border-radius: 50%;
 
-.Timer {
-  font-size: 9vh;
+  /* position: relative; */
+  max-width: 20rem;
+  max-height: 20rem;
 }
 
 .ModeDisplay {
-  font-size: 5vh;
+  margin-top: -2rem;
+}
+
+/* .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+} */
+
+.button {
+  margin: auto;
+  width: 60%;
+  height: 75%;
+  max-width: 15rem;
+  font-size: 1.4rem;
+}
+
+@media only screen and (min-width: 40rem) {
+  .App-main {
+    font-size: 3rem;
+  }
+
+  .timerbox {
+    max-width: 30rem;
+    max-height: 30rem;
+  }
 }
