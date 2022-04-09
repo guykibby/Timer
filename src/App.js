@@ -68,7 +68,7 @@ function App() {
     <main className={theState}>
       <section className="App-main">
         <div className={timerBoxState} onClick={switchstate}>
-          <p className="content">{timerTime}</p>
+          <p className="numDisplay">{timerTime}</p>
         </div>
         <div className="ModeDisplay">{theState}</div>
 
