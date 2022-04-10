@@ -4,12 +4,12 @@ import settingsIcon from "./SettingsIcon.png";
 import pauseIcon from "./Pause.png";
 import playIcon from "./Play.png";
 
-let state = "PAUSE";
+let state = JSON.parse(window.localStorage.getItem("theState")) || "PAUSE";
 let prevState = "WORK";
 
-let prevTime = 0;
+let prevTime = JSON.parse(window.localStorage.getItem("timerTime")) || 0;
 let startTime = Date.now();
-let newTime = 0;
+let newTime = JSON.parse(window.localStorage.getItem("timerTime")) || 0;
 
 const calcTime = () => {
   if (state === "WORK") {
@@ -46,9 +46,7 @@ const pauseTime = () => {
 // let hours = ("0" + Math.floor((time / 3600000) % 60)).slice(-2);
 
 function App() {
-  console.log("buggy");
-
-  const [timerTime, whatTime] = useState(5);
+  const [timerTime, whatTime] = useState(prevTime);
   const [theState, whatState] = useState("PAUSED");
 
   useEffect(() => {
@@ -56,10 +54,17 @@ function App() {
       calcTime();
       whatTime(Math.floor(newTime));
       whatState(state);
+      // console.log("buggy");
     };
+    // console.log(timerTime);
 
     setInterval(checkTime, 100);
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("timerTime", JSON.stringify(timerTime));
+    // window.localStorage.setItem("theState", JSON.stringify(theState));
+  }, [timerTime]);
 
   let timerBoxState = "timerbox Timer" + theState;
   let runImg = theState === "PAUSE" ? playIcon : pauseIcon;
